@@ -1,0 +1,9 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+/env
+# Datasource local storage ignored files
+/../../../../:\PTUT_2020\PTUT_2020\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
