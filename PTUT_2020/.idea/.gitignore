@@ -1,4 +1,9 @@
 # Default ignored files
+*.pyc
+*.txt
+__init__.py
+django.mo
+django.po
 /shelf/
 /workspace.xml
 /env
