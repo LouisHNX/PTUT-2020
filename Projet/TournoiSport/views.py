@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import team, pool, phase
+<<<<<<< Updated upstream
 import random
 from django.http import HttpResponse
 
@@ -98,4 +99,11 @@ def createPool(request):
         html = "<h1>zebi</h1>"
         return HttpResponse(html)
 
+=======
 
+# Create your views here.
+
+>>>>>>> Stashed changes
+
+def index(request):
+    return render(request,'TournoiSport/index.html' )
