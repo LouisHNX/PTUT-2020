@@ -1,14 +1,46 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import team, pool, phase
-<<<<<<< Updated upstream
-import random
 from django.http import HttpResponse
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login,logout
+import random
 
 # Create your views here.
-
+from .models import *
+from.forms import CreationUserFormulaire
 
 def index(request):
     return render(request,'TournoiSport/index.html' )
+
+def registerPage(request):
+    form = CreationUserFormulaire()
+    
+    if request.method == 'POST':
+        form=CreationUserFormulaire(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request,'Compte créé pour '+ user)
+            return redirect('login')
+
+    context={'form':form}
+    return render(request, 'TournoiSport/register.html',context )
+
+def loginPage(request):
+
+    if request.method=='POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request,username)
+            redirect('index')
+            
+    context ={}
+    return render(request,'TournoiSport/login.html',context)
 
 def listteam(request, name):
     name = team.objects.get(name = name)
@@ -67,7 +99,7 @@ def createPool(request):
 
         else: 
             nbTeamPerPool = 4
-            while (nbTeamQualified - 4 >= 4):
+            while nbTeamQualified - 4 >= 4:
                 for i in 4:
                     pool.objects.create(idPool = id)
                     for j in nbTeamPerPool:
@@ -78,7 +110,7 @@ def createPool(request):
                 id += 1
             nbTeamQualified -= 4
 
-            while (nbTeamQualified > 0):
+            while nbTeamQualified > 0:
                 for i in 4:
                     pool.create(pool,id)
                     for j in nbTeamPerPool:
@@ -98,12 +130,3 @@ def createPool(request):
     else:
         html = "<h1>zebi</h1>"
         return HttpResponse(html)
-
-=======
-
-# Create your views here.
-
->>>>>>> Stashed changes
-
-def index(request):
-    return render(request,'TournoiSport/index.html' )

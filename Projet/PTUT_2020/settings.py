@@ -124,3 +124,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static'),
 ]
+
+
+USER_LOGIN = 'username'
+USER_PASSWORD ='password'
+
+ADMIN_LOGIN = 'admin'
+ADMIN_PASSWORD ='password'
+
+SUPERADMIN_LOGIN = 'superadmin'
+SUPERADMIN_PASSWORD ='password'

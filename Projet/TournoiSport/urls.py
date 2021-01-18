@@ -4,15 +4,15 @@ from . import views
 
 
 urlpatterns = [
-<<<<<<< Updated upstream
-    path('',views.index),
+    path('',views.index, name='index'),
     path('gestionTournoi/', views.gestionTournoi),
     path('createTournoi/', views.pagecreatetournoi),
     path('listeTournois/', views.listetournois),
     path('gestionTournoi/createPool/', views.createPool),
     path('gestionTournoi/<str:name>/', views.listteam),
-    path('create/', views.createtournoi)
-=======
-    path('',views.index, name='index'),
->>>>>>> Stashed changes
+    path('create/', views.createtournoi),
+    
+    #Connexion/Inscription
+    path('register/', views.registerPage, name="register"),
+    path('login/',views.loginPage, name="login")
 ]
