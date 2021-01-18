@@ -37,11 +37,17 @@ def loginPage(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request,username)
-            redirect('index')
+            login(request,user)
+            return redirect('index')
+        else:
+            messages.info(request, 'Le nom d utilisateur ou le mot de passe est incorrect')
 
     context ={}
     return render(request,'TournoiSport/login.html',context)
+
+def logoutUser(request):
+    logout(request)
+    return(redirect('login'))
 
 def listteam(request, name):
     name = team.objects.get(name = name)
