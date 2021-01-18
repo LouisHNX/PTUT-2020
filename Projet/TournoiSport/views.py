@@ -10,6 +10,7 @@ import random
 from .models import *
 from.forms import CreationUserFormulaire
 
+
 def index(request):
     return render(request,'TournoiSport/index.html' )
 
@@ -38,7 +39,7 @@ def loginPage(request):
         if user is not None:
             login(request,username)
             redirect('index')
-            
+
     context ={}
     return render(request,'TournoiSport/login.html',context)
 
