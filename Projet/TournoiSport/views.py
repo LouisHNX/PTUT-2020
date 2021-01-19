@@ -54,84 +54,115 @@ def listteam(request, name):
     data = {'team' : name}
     return render(request, 'TournoiSport/team.html', data) 
 
+
 def gestionTournoi(request):
     name = team.objects.all()
     data = {'teams' : name}
     return render(request, 'TournoiSport/gestionTournoi.html',data)
 
+
 def pagecreatetournoi(request):
     return render(request, 'TournoiSport/createTournoi.html')
 
+
 def createtournoi(request):
-    name = request.POST.get('tournamenentName','')
-    tournament.objects.create(name = name)
-    html = "<h1>Tournoi Crée {name}</h1>"
-    
-    return HttpResponse(html)
+    if request.method == 'POST':
+        tname = request.POST.get('tournamenentName','')
+        #tournament.objects.create(name = tname)
+        messages.success(request,'Tournoi crée '+ tname)
+        return redirect('pagecreatetournoi')
+
+    return render(request, 'TournoiSport/createTournoi.html')
+
 
 def listetournois(request):    
     return render(request, 'TournoiSport/listeTournois.html')   
 
 
 def createPool(request):
-    id = 1
-    nbTeamQualified = 6
+    Phase = phase.objects.get(idPhase = 1)
+    nbTeamQualified = Phase.nbTeamQualified
     pool_3_4 = False
-    teamlist = list(range(1,nbTeamQualified))
+    teamlist = list(range(1,nbTeamQualified+1))
     random.shuffle(teamlist)
+    idListe = 0  
+    i = 0
+    j = 0
 
-    if(phase.objects.get(idPhase=1) == 1):
+    if(Phase.idPhase == 1):
+
         if(nbTeamQualified % 4) == 0:
-            p = phase(nbTeamPerPool = 4)
-            p.save()
+            Phase.nbTeamPerPool = 4
+            Phase.save()
             nbTeamPerPool = 4
-            pool_3_4 = True
-
-        if (nbTeamQualified % 3) == 0:
-            p = phase(nbTeamPerPool = 3)
-            p.save()
-            nbTeamPerPool = 3
+            nbPool = nbTeamQualified // 4
             pool_3_4 = True
             
-        if pool_3_4 == True:    
-            for i in nbTeamQualified:
-                pool.objects.create(idPool = id)
-                for j in nbTeamPerPool:
-                    x = teamlist[j]
+
+        if (nbTeamQualified % 3) == 0:
+            Phase.nbTeamPerPool = 3
+            Phase.save()
+            nbTeamPerPool = 3
+            nbPool = nbTeamQualified // 3
+            pool_3_4 = True
+
+
+        if pool_3_4 == True:  
+            id = 1
+            
+            for i in range(nbPool):
+                Pool = pool(idPool = id)
+                Pool.save()
+                for j in range(nbTeamPerPool):
+                    x = teamlist[idListe]
                     t = team.objects.get(idTeam=x)
-                    t = t.objects.create(idPoolT = id)
+                    t.idPoolT = id
                     t.save()
-            id += 1
+                    idListe +=  1
 
+                id += 1
 
-        else: 
+        
+        else:
+            id = 1 
             nbTeamPerPool = 4
-            while nbTeamQualified - 4 >= 4:
-                for i in 4:
-                    pool.objects.create(idPool = id)
-                    for j in nbTeamPerPool:
-                        x = teamlist[j]
-                        t = team.objects.get(idTeam=x)
-                        t = t.objects.create(idPoolT = id)
-                        t.save()
-                id += 1
-            nbTeamQualified -= 4
+            while nbTeamQualified >= 4:
+                Pool = pool(idPool = id)
+                Pool.save()
+                for j in range(nbTeamPerPool):
+                    x = teamlist[idListe]
+                    t = team.objects.get(idTeam=x)
+                    t.idPoolT = id
+                    t.save()
+                    idListe += 1
 
+                nbTeamQualified -= 4
+                id += 1
+                                 
+
+            nbTeamPerPool = 3
             while nbTeamQualified > 0:
-                for i in 4:
-                    pool.create(pool,id)
-                    for j in nbTeamPerPool:
-                        x = teamlist[j]
-                        t = team.objects.get(idTeam=x)
-                        t = t.objects.create(idPoolT = id)
-                        t.save()
+                Pool = pool(idPool = id)
+                Pool.save() 
+
+                for j in range(nbTeamPerPool):
+                    x = teamlist[idListe]
+                    t = team.objects.get(idTeam=x)
+                    t.idPoolT = id
+                    t.save()   
+                    idListe += 1
+
+                nbTeamQualified -= 3
                 id += 1
+            
 
 
 
-        name = pool.objects.all()
-        data = {'pools' : name}        
-        return render(request, 'TournoiSport/gestionTournoi.html', data) 
+        #name = pool.objects.all()
+        #data = {'pools' : name}        
+        #return render(request, 'TournoiSport/gestionTournoi.html', data) 
+        html = "<h1>OUIIIIIIIII</h1>"
+        return HttpResponse(html)
 
 
     else:

@@ -18,6 +18,9 @@ class pool(models.Model):
 
     idPool = models.IntegerField()
 
+    def __str__(self):
+        return str(self.idPool)
+
 class phase(models.Model):
 
     idPhase = models.IntegerField() #1 = phase de poule
