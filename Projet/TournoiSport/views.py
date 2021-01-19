@@ -143,7 +143,7 @@ def createPool(request):
             nbTeamPerPool = 3
             while nbTeamQualified > 0:
                 Pool = pool(idPool = id)
-                Pool.save()
+                Pool.save() 
 
                 for j in range(nbTeamPerPool):
                     x = teamlist[idListe]
@@ -154,9 +154,9 @@ def createPool(request):
 
                 nbTeamQualified -= 3
                 id += 1
-
-             
             
+
+
 
         #name = pool.objects.all()
         #data = {'pools' : name}        
