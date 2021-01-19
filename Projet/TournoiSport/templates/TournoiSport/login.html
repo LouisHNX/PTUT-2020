@@ -42,6 +42,14 @@
                             focus:outline-none hover:bg-gray-700 hover:shadow-none">
                             Connexion
                         </button>
+                        <div class="w-full py-3 mt-10 bg-gray-800 rounded-sm
+                        font-medium text-white uppercase
+                        focus:outline-none hover:bg-gray-700 hover:shadow-none text-center">
+                            <a class="w-full py-3 mt-10 bg-gray-800 rounded-sm
+                            font-medium text-white uppercase
+                            focus:outline-none hover:bg-gray-700 hover:shadow-none text-center" 
+                            href="{% url 'register' %}">Pas encore Inscrit ?</a>
+                        </div>
                         {% for message in messages %}
                            <p id="messages">{{message}}</p>
                         {% endfor %} 
