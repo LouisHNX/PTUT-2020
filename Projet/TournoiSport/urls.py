@@ -7,7 +7,7 @@ urlpatterns = [
     path('',views.index, name='index'),
     path('gestionTournoi/', views.gestionTournoi),
     path('createTournoi/', views.pagecreatetournoi),
-    path('listeTournois/', views.listetournois),
+    path('listeTournois/', views.listetournois, name="listeTournois"),
     path('gestionTournoi/createPool/', views.createPool),
     path('gestionTournoi/<str:name>/', views.listteam),
     path('create/', views.createtournoi),
