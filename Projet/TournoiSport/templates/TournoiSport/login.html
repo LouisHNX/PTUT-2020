@@ -28,14 +28,14 @@
                           {% if user.is_staff %}
                               <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
                               <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
-                              <li class="mr-5 hover:text-gray-900"><a href="gestionTournoi/">Gestion tournoi</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href="{% url 'gestionTournoi' %}">Gestion tournoi</a></li>
                               <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
                           {% endif %}
                           {% if user.groups.all.0.name == "superAdmin"%}
                               <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
-                              <li class="mr-5 hover:text-gray-900"><a href="createTournoi/">Création tournoi</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href="{% url 'creationTournoi' %}">Création tournoi</a></li>
                               <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
-                              <li class="mr-5 hover:text-gray-900"><a href="gestionTournoi/">Gestion tournoi</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href="{% url 'gestionTournoi' %}">Gestion tournoi</a></li>
                               <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
                           {% endif %}
                       {% endif %}   

@@ -1,1 +1,65 @@
-<h1>Tous les tournois</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://unpkg.com/tailwindcss@%5E2/dist/tailwind.min.css" rel="stylesheet">
+        <title>Tournoi RYL</title>
+    </head>
+    <body style="background: #edf2f7;">
+        <header class="container mx-auto my-6 text-gray-600 body-font">
+              <nav>
+                  <ul class="md:ml-auto flex  flex-row space-x-8 items-center text-base justify-between">
+                    <a href="{% url 'index' %}"><span class="ml-3 text-4xl">Tournoi IUT</span></a>
+                    <div class="flex justify-end justify-between">
+                        {% if user.is_anonymous %}
+                            <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour,</span>
+                            <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                            <li class="mr-5 hover:text-gray-900"><a href="{% url 'register' %}">Inscription</a></li>
+                            <li class="mr-5 hover:text-gray-900"><a href="{% url 'login' %}">Connexion</a></li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            {% if user.groups.all.0.name == "etudiant" %}
+                                <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
+                                <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                                <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
+                            {% endif %}
+                            {% if user.is_staff %}
+                                <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
+                                <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                                <li class="mr-5 hover:text-gray-900"><a href="{% url 'gestionTournoi' %}">Gestion tournoi</a></li>
+                                <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
+                            {% endif %}
+                            {% if user.groups.all.0.name == "superAdmin"%}
+                                <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
+                                <li class="mr-5 hover:text-gray-900"><a href="{% url 'creationTournoi' %}">Création tournoi</a></li>
+                                <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                                <li class="mr-5 hover:text-gray-900"><a href="{% url 'gestionTournoi' %}">Gestion tournoi</a></li>
+                                <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
+                            {% endif %}
+                        {% endif %}   
+                    </div>
+                  </ul>
+              </nav>
+        </header>
+
+        <main  class="container mx-auto"> 
+
+        </main>
+        
+        <footer class="container mx-auto absolute inset-x-0 bottom-0 py-8 text-gray-600 body-font">
+            <div class="flex flex-row justify-center">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span class="ml-3 text-xl">Tournoi IUT</span>
+                </a>
+                <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2021 PTUT —
+                    <a href="" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@RYL</a>
+                </p>
+            </div>
+        </footer>
+    </body>
+</html>
