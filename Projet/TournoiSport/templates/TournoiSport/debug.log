@@ -2,3 +2,4 @@
 [0107/141417.947:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Megaport\AppData\Local\AVAST Software\Browser\User Data\Crashpad\attachments\bc158f4e-4a32-4947-89a6-cb53a5f6d1ca: Le chemin d’accès spécifié est introuvable. (0x3)
 [0107/141417.948:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Megaport\AppData\Local\AVAST Software\Browser\User Data\Crashpad\attachments\32a5a429-0b01-4214-8501-962168ddfd5d: Le chemin d’accès spécifié est introuvable. (0x3)
 [0107/141417.949:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Megaport\AppData\Local\AVAST Software\Browser\User Data\Crashpad\attachments\e84a3fd3-06f0-443d-9d48-ead9cb8c558c: Le chemin d’accès spécifié est introuvable. (0x3)
+[0119/145018.242:ERROR:directory_reader_win.cc(43)] FindFirstFile: Le chemin d’accès spécifié est introuvable. (0x3)
