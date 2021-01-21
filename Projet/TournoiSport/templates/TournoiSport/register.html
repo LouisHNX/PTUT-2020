@@ -8,22 +8,41 @@
         <title>Inscription</title>
     </head>
     <body class="overflow-hidden " style="background: #edf2f7;">
-        <header class="container mx-auto my-6 body-font">
+        <header class="container mx-auto my-6 text-gray-600 body-font">
             <nav>
                 <ul class="md:ml-auto flex  flex-row space-x-8 items-center text-base justify-between">
-                    <span class="ml-3 text-4xl">Tournoi IUT</span>
-                    <div class="flex justify-end justify-between">
-                        <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
-                        <li class="mr-5 hover:text-gray-900"><a href="../TournoiSport/listeTournois/">Liste des tournois</a></li>
-                        <li class="mr-5 hover:text-gray-900"><a href="../TournoiSport/gestionTournoi/">Gestion tournoi</a></li>
-                        <li class="mr-5 hover:text-gray-900"><a href="../TournoiSport/createTournoi/">Création tournoi</a></li>
-                        <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
-                        <li class="mr-5 hover:text-gray-900"><a href="{% url 'login' %}">Connexion</a></li>
-                        <li class="mr-5 hover:text-gray-900"><a href="{% url 'register' %}">Inscription</a></li>
-                    </div>
+                  <a href="{% url 'index' %}"><span class="ml-3 text-4xl">Tournoi IUT</span></a>
+                  <div class="flex justify-end justify-between">
+                      {% if user.is_anonymous %}
+                          <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour,</span>
+                          <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                          <li class="mr-5 hover:text-gray-900"><a href="{% url 'register' %}">Inscription</a></li>
+                          <li class="mr-5 hover:text-gray-900"><a href="{% url 'login' %}">Connexion</a></li>
+                      {% endif %}
+                      {% if user.is_authenticated %}
+                          {% if user.groups.all.0.name == "etudiant" %}
+                              <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
+                              <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
+                          {% endif %}
+                          {% if user.is_staff %}
+                              <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
+                              <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href="gestionTournoi/">Gestion tournoi</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
+                          {% endif %}
+                          {% if user.groups.all.0.name == "superAdmin"%}
+                              <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
+                              <li class="mr-5 hover:text-gray-900"><a href="createTournoi/">Création tournoi</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href="gestionTournoi/">Gestion tournoi</a></li>
+                              <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
+                          {% endif %}
+                      {% endif %}   
+                  </div>
                 </ul>
             </nav>
-        </header>
+      </header>
         <div class="flex flex-col bg-gray-100 w-full h-full">
             <div class="grid place-items-center mx-2 my-20">
                 <div class="w-11/12 p-12 sm:w-8/12 md:w-6/12 lg:w-5/12 2xl:w-4/12 
