@@ -1,7 +1,20 @@
-<h1>création d'un tournoi</h1>
+<h1>Créer un tournoi</h1>
 
 <form action="/create/" method="post">
+	{% csrf_token %}
     <label for="tournamentName">Nom du tournoi :</label>
     <input id="tournamentName" type="text" name="tournamentName" value="{{ current_name }}">
+    <br>
+    <label for="tournamentSport">Discipline :</label>
+    <input id="tournamentSport" type="text" name="tournamentSport" value="{{ current_sport }}">
+    <br>
+    <label for="tournamentNb">Nombre de participants :</label>
+    <input id="tournamentNb" type="number" name="tournamentNb" value="{{ current_nb }}">
+    <br>
+    <label for="tournamentPlace">Lieu :</label>
+    <input id="tournamentPlace" type="text" name="tournamentPlace" value="{{ current_place }}">
+    <br>
+    <label for="tournamentDate">Date :</label>
+    <input id="tournamentDate" type="date" name="tournamentDate" value="{{ current_date }}"> 
     <input type="submit" value="OK">
 </form>

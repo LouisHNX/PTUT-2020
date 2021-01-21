@@ -1,5 +1,6 @@
 from django.db import models
 from django import forms
+from django.forms import ModelForm
 from django.conf import settings
 from django.contrib.auth.backends import BaseBackend
 from django.contrib.auth.hashers import check_password
@@ -18,9 +19,6 @@ class pool(models.Model):
 
     idPool = models.IntegerField()
 
-    def __str__(self):
-        return str(self.idPool)
-
 class phase(models.Model):
 
     idPhase = models.IntegerField() #1 = phase de poule
@@ -35,9 +33,13 @@ class tournament(models.Model):
 
     idTournament = models.IntegerField()
     name = models.CharField(max_length = 50)
-
+    sport = models.CharField(max_length = 50)
+    nb = models.IntegerField()
+    place = models.CharField(max_length = 50)
+    date = models.DateField(auto_now=False, auto_now_add=False)
     def __str__(self):
         return self.name
+
 #TEST ->
 class SettingsBackend(BaseBackend):
     def authenticate(self,request, username=None, password=None):
