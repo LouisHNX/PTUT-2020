@@ -10,7 +10,7 @@ urlpatterns = [
     path('listeTournois/', views.listetournois, name="listeTournois"),
     path('gestionTournoi/createPool/', views.createPool),
     path('gestionTournoi/<str:name>/', views.listteam),
-    path('create/', views.createtournoi),
+    #path('create/', views.createtournoi),
     
     #Connexion/Inscription
     path('register/', views.registerPage, name="register"),

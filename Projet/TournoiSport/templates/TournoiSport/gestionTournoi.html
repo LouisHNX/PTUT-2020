@@ -30,6 +30,11 @@
                             <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
                             <li class="mr-5 hover:text-gray-900"><a href="{% url 'gestionTournoi' %}">Gestion tournoi</a></li>
                             <li class="mr-5 hover:text-gray-900"><a href=" {% url 'logout' %} ">Deconnexion</a></li>
+                            {% if pools %}
+                                <li class="bg-yellow-500 rounded-xl p-4"><a href="">Générer classement</a></li>
+                            {% else %}
+                                <li class="bg-yellow-500 rounded-xl p-4"><a href="createPool/">Création des poules</a></li>
+                            {% endif %}
                         {% endif %}
                         {% if user.groups.all.0.name == "superAdmin"%}
                             <span class="mr-5 hover:text-gray-90 border-b-2 border-blue-400">Bonjour, {{request.user}}</span>
@@ -44,13 +49,37 @@
             </nav>
         </header>
         <main  class="container mx-auto pt-2">
-            <h1>Teams</h1>
+                <h1>Teams</h1>
             <br>
-            {% for team in teams %}
-    
-                <h3><a href="{{ team.name }}">{{ team.name }}</a></h3>
-    
-            {% endfor %}
+
+            {% if pools %}
+                {% for pool in pools %}
+
+                    <h3><a href="visualisationMatchs/">Poules : {{ pool.idPool }}</a></h3>
+                    <br>
+                    {% for team in teams %}
+
+                        {% if team.idPoolT == pool.idPool %}
+
+                            <h3><a href="{{ team.name }}">{{ team.name }}</a></h3> 
+
+                        {% endif %} 
+
+                    {% endfor %}
+
+
+                    <br>
+                {% endfor %}
+
+            {% else %} 
+
+                {% for team in teams %}
+
+                    <h3><a href="{{ team.name }}">{{ team.name }}</a></h3> 
+
+                {% endfor %}
+
+            {% endif %}
         </main>
         <footer class="container mx-auto absolute inset-x-0 bottom-0 py-8 text-gray-600 body-font">
             <div class="flex flex-row justify-center">

@@ -18,6 +18,7 @@
                             <li class="mr-5 hover:text-gray-900"><a href="{% url 'listeTournois' %}">Liste des tournois</a></li>
                             <li class="mr-5 hover:text-gray-900"><a href="{% url 'register' %}">Inscription</a></li>
                             <li class="mr-5 hover:text-gray-900"><a href="{% url 'login' %}">Connexion</a></li>
+                            <li class="mr-5 hover:text-gray-900"><a href="{% url 'creationTournoi' %}">Création tournoi</a></li>
                         {% endif %}
                         {% if user.is_authenticated %}
                             {% if user.groups.all.0.name == "etudiant" %}
